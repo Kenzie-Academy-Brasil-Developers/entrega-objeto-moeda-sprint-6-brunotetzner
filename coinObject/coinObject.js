@@ -61,5 +61,5 @@ function display20Images() {
     // return results
 }
 
-display20Images()
+
 
