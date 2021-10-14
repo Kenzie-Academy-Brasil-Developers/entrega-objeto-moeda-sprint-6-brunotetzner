@@ -57,8 +57,7 @@ function display20Images() {
         results.push(coin.toString(coin.flip()))
         coin.toHTML()
     }
-    console.log(results)
-    // return results
+    return results
 }
 
 
