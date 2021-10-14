@@ -1,66 +1,64 @@
+const corpoDoPrograma = document.querySelector('body')
+const sectionImg = document.createElement("section")
 const coin = {
     state: 0,
-  
+
     flip: function () {
-      // Use "this.state" para acessar a propriedade "state".
-      // Configure de forma randômica a propriedade “state” do
-      // seu objeto moeda. "STATE" deve receber somente os valores 0 ou 1.
-      if(this.state === 0){
-          this.state = 1
-      }
-      else{
-          this.state = 0
-      }
-      return this.state
-      
+        const stateRandom = (min, max) => {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        this.state = stateRandom(0, 1)
+
+        return this.state
     },
-  
+
     toString: function () {
-      // Se o valor de "state" for 0, retorne "Heads"
-      // Se o valor de "state" for 1, retorne "Tails"
-      if(this.state === 0){
-          return '  Heads'
-      }
-      else{
-          return 'Tails'
-      }
+        if (this.state === 0) {
+            return '  Heads'
+        }
+        else {
+            return 'Tails'
+        }
     },
-  
     toHTML: function () {
-      const image = document.createElement("img");
-      const sectionImg = document.getElementById("section__cara_coroa")
-      sectionImg.appendChild(image)
-      // Colocar uma imagem correspondente a essa valor.
-      // image.src = "./CAMINHO/IMAGEM.JPEG"
-      // image.alt = "Heads/Tails"
-      if(this.toString() === '  Heads'){
-        image.src = '/assets/img/cara.jpg'
-      }
-      else{}
+        const image = document.createElement("img");
 
-      return image;
+        corpoDoPrograma.appendChild(sectionImg)
+        sectionImg.appendChild(image)
+
+        if (this.toString() === '  Heads') {
+            image.src = 'assets/img/cara.jpg'
+        }
+        else {
+            image.src = 'assets/img/coroa.jpeg'
+
+        }
+        return image;
     },
-  };
-  function display20Flips() {
+};
+function display20Flips() {
     const results = [];
-    // Use um loop para arremessar a moeda 20 vezes.
-    // Depois que o seu loop terminar, exiba o resultado na página no formato de TEXTO.
-    // Além de exibir os resultados na página, não esqueça
-    // de retornar o valor de "results".
-    // Caso esqueça de retornar "results", sua função não
-    // irá passar nos testes.
-  }
-  
-  function display20Images() {
-    const results = [];
-    // Use um loop para arremessar a moeda 20 vezes.
-    // Depois que o seu loop terminar, exiba o resultado na página no formato de IMAGEM.
-    // Além de exibir os resultados na página, não esqueça
-    // de retornar o valor de "results".
-    // Caso esqueça de retornar "results", sua função não
-    // irá passar nos testes.
-  }
-  coin.flip()
-  coin.toString()
+    for (let count = 0; count < 20; count++) {
+       results.push(coin.toString(coin.flip()))
+    }   
+    const textResults = document.createElement('p')
+    const sectionText = document.createElement('section')
+    textResults.innerHTML = results
+    corpoDoPrograma.appendChild(sectionText)
+    sectionText.appendChild(textResults)
+    return results 
+}
 
-  
+function display20Images() {
+    const results = [];
+    for (let count = 0; count < 20; count++) {
+        results.push(coin.toString(coin.flip()))
+        coin.toHTML()
+    }
+    return results
+}
+display20Flips()
+display20Images()
+
