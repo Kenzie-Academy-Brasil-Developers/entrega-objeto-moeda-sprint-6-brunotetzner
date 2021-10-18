@@ -61,4 +61,5 @@ function display20Images() {
 }
 
 
-
+display20Flips()
+display20Images()
